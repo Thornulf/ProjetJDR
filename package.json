@@ -1,0 +1,10 @@
+{
+  "name": "ProjetJDR",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Thomas.S",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.3.1"
+  }
+}
