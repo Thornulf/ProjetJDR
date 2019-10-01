@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="/ProjetJDR/css/main.css" />
-        <title>Acceuil</title>
+        <title>Accueil</title>
     </head>
     
     <body>
@@ -24,7 +24,7 @@
         
         <article id="articleAccueil">
             <h1>Accueil</h1>
-            <br>
+            <img src="images/Pathfinder.jpg" align="center" height="500" width="900">
             <label class="messageOrange">
                 ${message}
             </label>
