@@ -98,7 +98,7 @@ public class Fonctions {
             if(rs.next()) {
                 int nivSup = rs.getInt(1);
                 
-                if(perso.getExperience() > nivSup) {
+                if(perso.getExperience() >= nivSup) {
                     test = true;
                 }
             }

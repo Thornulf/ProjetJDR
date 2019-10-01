@@ -166,8 +166,8 @@ public class Personnage{
         return this.getExperience() + experience;
     }
     
-    public int gagnerNiveau(int niveau) {
-        return this.getNiveaux() + niveau;
+    public int gagnerNiveau() {
+        return this.getNiveaux() + 1;
     }
     
 }

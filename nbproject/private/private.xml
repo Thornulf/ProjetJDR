@@ -13,8 +13,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/src/java/fr/ts/controls/FinDeQuete.java</file>
+            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/src/java/fr/ts/entities/Personnage.java</file>
             <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/web/JSP/Accueil.jsp</file>
-            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/src/java/fr/ts/controls/CreationPersonnage.java</file>
+            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/src/java/fr/ts/entities/Fonctions.java</file>
+            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/src/java/fr/ts/controls/FichePerso.java</file>
+            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/src/java/fr/ts/dao/PersonnageDAO.java</file>
             <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/web/JSP/FinDeQuete.jsp</file>
         </group>
     </open-files>
