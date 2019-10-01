@@ -18,6 +18,10 @@ import fr.ts.entities.classes.Magicien;
 import fr.ts.entities.classes.Ensorceleur;
 import fr.ts.dao.PersonnageDAO;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.Normalizer;
 
 /**
@@ -82,5 +86,28 @@ public class Fonctions {
 
         return ok;
     }
+    
+    public static boolean okGagnerNiveau(Personnage perso, Connection cn) {
+        boolean test = false;       
+        
+        try {
+            String lsSql = "SELECT niv_sup FROM niveaux WHERE niveau = " + perso.getNiveaux();
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(lsSql);
+            
+            if(rs.next()) {
+                int nivSup = rs.getInt(1);
+                
+                if(perso.getExperience() > nivSup) {
+                    test = true;
+                }
+            }
+            
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        
+        return test;
+    } 
 
 }
