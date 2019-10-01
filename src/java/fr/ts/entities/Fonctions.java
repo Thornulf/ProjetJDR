@@ -18,7 +18,6 @@ import fr.ts.entities.classes.Magicien;
 import fr.ts.entities.classes.Ensorceleur;
 import fr.ts.dao.PersonnageDAO;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
