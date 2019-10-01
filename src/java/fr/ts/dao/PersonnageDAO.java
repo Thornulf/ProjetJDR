@@ -124,15 +124,14 @@ public class PersonnageDAO {
     }
 
     public static int update(Connection cn, Personnage perso) {
-        int liAffect = 0;
+        int liAffect = -1;
 
-        try {
-            String lsSQL = "UPDATE personnages";
-            lsSQL += " SET vie = ?, p_force = ?, p_dexterite = ?, p_intelligence = ?, p_constitution = ?, p_sagesse = ?, p_charisme = ?, experience = ?, niveau = ?";
-            lsSQL += "WHERE nom = ? AND prenom = ?";
-
-            PreparedStatement lpst = cn.prepareStatement(lsSQL);
-
+        String lsSQL = "UPDATE personnages";
+        lsSQL += " SET vie = ?, p_force = ?, p_dexterite = ?, p_intelligence = ?, p_constitution = ?, p_sagesse = ?, p_charisme = ?, experience = ?, niveau = ?";
+        lsSQL += " WHERE prenom = ? AND nom = ?";
+        
+        try (PreparedStatement lpst = cn.prepareStatement(lsSQL)) {
+            
             lpst.setInt(1, perso.getVie());
             lpst.setInt(2, perso.getForce());
             lpst.setInt(3, perso.getDexterite());
@@ -142,10 +141,11 @@ public class PersonnageDAO {
             lpst.setInt(7, perso.getCharisme());
             lpst.setInt(8, perso.getExperience());
             lpst.setInt(9, perso.getNiveaux());
+            lpst.setString(10, perso.getNom());
+            lpst.setString(11, perso.getPrenom());
 
             liAffect = lpst.executeUpdate();
 
-            lpst.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
