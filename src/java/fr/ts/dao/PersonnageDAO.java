@@ -128,7 +128,7 @@ public class PersonnageDAO {
 
         try {
             String lsSQL = "UPDATE personnages";
-            lsSQL += " SET vie = ?, p_force = ?, p_dexterite = ?, p_intelligence = ?, experience = ?, niveau = ?";
+            lsSQL += " SET vie = ?, p_force = ?, p_dexterite = ?, p_intelligence = ?, p_constitution = ?, p_sagesse = ?, p_charisme = ?, experience = ?, niveau = ?";
             lsSQL += "WHERE nom = ? AND prenom = ?";
 
             PreparedStatement lpst = cn.prepareStatement(lsSQL);
@@ -137,8 +137,11 @@ public class PersonnageDAO {
             lpst.setInt(2, perso.getForce());
             lpst.setInt(3, perso.getDexterite());
             lpst.setInt(4, perso.getIntelligence());
-            lpst.setInt(5, perso.getExperience());
-            lpst.setInt(6, perso.getNiveaux());
+            lpst.setInt(5, perso.getConstitution());
+            lpst.setInt(6, perso.getSagesse());
+            lpst.setInt(7, perso.getCharisme());
+            lpst.setInt(8, perso.getExperience());
+            lpst.setInt(9, perso.getNiveaux());
 
             liAffect = lpst.executeUpdate();
 
