@@ -18,9 +18,9 @@ public final class Barbare extends Personnage {
     public Barbare() {
         super();
     }   
-    
+
     public Barbare(String nom, String prenom, int vie, int force, int dexterite, int intelligence, int constitution, int sagesse, int charisme, int experience, int idUtilisateur, int idClasse, int niveaux) {
-        super(nom, prenom, experience, idUtilisateur, idClasse, niveaux);
+        super(nom, prenom, vie, force, dexterite, intelligence, constitution, sagesse, charisme, experience, idUtilisateur, idClasse, niveaux);
         this.vie = this.setVie(vie);
         this.force = this.setForce(force);
         this.dexterite = this.setDexterite(dexterite);

@@ -30,10 +30,17 @@ public class Personnage{
 
     public Personnage() {
     }
-    
-    public Personnage(String nom, String prenom, int experience, int idUtilisateur, int idClasse, int niveaux) {
+
+    public Personnage(String nom, String prenom, int vie, int force, int dexterite, int intelligence, int constitution, int sagesse, int charisme, int experience, int idUtilisateur, int idClasse, int niveaux) {
         this.nom = this.setNom(nom);
         this.prenom = this.setPrenom(prenom);
+        this.vie = this.setVie(vie);
+        this.force = this.setForce(force);
+        this.dexterite = this.setDexterite(dexterite);
+        this.intelligence = this.setIntelligence(intelligence);
+        this.constitution = this.setConstitution(constitution);
+        this.sagesse = this.setSagesse(sagesse);
+        this.charisme = this.setCharisme(charisme);
         this.experience = this.setExperience(experience);
         this.idUtilisateur = this.setIdUtilisateur(idUtilisateur);
         this.idClasse = this.setIdClasse(idClasse);
@@ -158,4 +165,9 @@ public class Personnage{
     public int gagnerExperience(int experience) {
         return this.getExperience() + experience;
     }
+    
+    public int gagnerNiveau(int niveau) {
+        return this.getNiveaux() + niveau;
+    }
+    
 }

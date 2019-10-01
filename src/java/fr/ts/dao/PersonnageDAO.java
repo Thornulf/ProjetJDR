@@ -74,7 +74,14 @@ public class PersonnageDAO {
                         lrs.getInt(4),
                         lrs.getInt(5),
                         lrs.getInt(6),
-                        lrs.getInt(7));
+                        lrs.getInt(7),
+                        lrs.getInt(8),
+                        lrs.getInt(9),
+                        lrs.getInt(10),
+                        lrs.getInt(11),
+                        lrs.getInt(12),
+                        lrs.getInt(13),
+                        lrs.getInt(14));
             }
 
             lrs.close();
