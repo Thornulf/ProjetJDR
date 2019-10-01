@@ -25,23 +25,26 @@ public class ControleurPrincipal extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        Connection gcn = null;
-        String lsMessage = "";
-        
-        try {
-            Class.forName("org.gjt.mm.mysql.Driver");
-            gcn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/jeu_de_role", "root", "");
-        } catch (ClassNotFoundException | SQLException e) {
-            lsMessage = "La connection à échouée";
-        }
-        
+
         HttpSession session = request.getSession();
-        session.setAttribute("connection",gcn);
-        
+        Connection gcn = (Connection) session.getAttribute("connection");
+
+        String lsMessage = "";
+
+        if (gcn == null) {
+            try {
+                Class.forName("org.gjt.mm.mysql.Driver");
+                gcn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/jeu_de_role", "root", "");
+            } catch (ClassNotFoundException | SQLException e) {
+                lsMessage = "La connection à échouée";
+            }
+
+            session.setAttribute("connection", gcn);
+        }
+
         request.setAttribute("message", lsMessage);
         response.setContentType("text/html;charset=UTF-8");
-        getServletContext().getRequestDispatcher("/JSP/Acceuil.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/JSP/Accueil.jsp").forward(request, response);
     }
 
 }
