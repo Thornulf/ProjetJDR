@@ -17,7 +17,7 @@ $(document).ready(function () {
           type = "primary"
         };
         
-        $.getJSON('ProjetJDR/Ajax_FinDeQuete' , {
+        $.getJSON('Ajax_FinDeQuete' , {
             nom : nom,
             prenom : prenom
         }, function(data) {

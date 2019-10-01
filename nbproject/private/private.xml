@@ -13,11 +13,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/src/java/fr/ts/controls/FinDeQuete.java</file>
-            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/web/JSP/AccesRefuse.jsp</file>
-            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/web/js/FinDeQuete.js</file>
-            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/web/JSP/CreatePersonnage.jsp</file>
+            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/web/JSP/Accueil.jsp</file>
+            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/src/java/fr/ts/controls/CreationPersonnage.java</file>
             <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/web/JSP/FinDeQuete.jsp</file>
-            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/src/java/fr/ts/ajax/Ajax_FinDeQuete.java</file>
         </group>
     </open-files>
 </project-private>
