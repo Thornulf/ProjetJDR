@@ -6,6 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<p style="text-align: center">
-    Gestion Jeux de Rôles
-</p>
+<a href="/ProjetJDR/ControleurPrincipal" style="display: block; text-align: center; font-family: inherit; color: white; text-decoration: none;">
+    PATHFINDER
+</a>
