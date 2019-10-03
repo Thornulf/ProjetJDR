@@ -20,6 +20,11 @@ import java.util.List;
  */
 public class ClassesDAO {
     
+    /**
+     * Permet d'avoir tous les classes de la BD
+     * @param cn
+     * @return 
+     */
     public static List<Classes> selectAll(Connection cn) {
         List<Classes> out = new ArrayList();
         
@@ -44,6 +49,12 @@ public class ClassesDAO {
         return out;
     }
     
+    /**
+     * Selectionne une classe en fonction de son id
+     * @param cn
+     * @param id
+     * @return 
+     */
     public static Classes selectOne(Connection cn, int id) {
         Classes classe = null;
         
@@ -66,6 +77,12 @@ public class ClassesDAO {
         return classe;
     }
     
+    /**
+     * permet de créer une nouvelle classe
+     * @param cn
+     * @param nomClasse
+     * @return 
+     */
     public static int insert(Connection cn, String nomClasse) {
         int liAffect = 0;
         

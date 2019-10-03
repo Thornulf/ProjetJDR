@@ -29,21 +29,21 @@ public class PersonnageDAO {
             ResultSet lrs = stmt.executeQuery(lsSQL);
 
             while (lrs.next()) {
-                Personnage perso = new Personnage();
-                perso.setIdPersonnage(lrs.getInt(1));
-                perso.setPrenom(lrs.getString(2));
-                perso.setNom(lrs.getString(3));
-                perso.setVie(lrs.getInt(4));
-                perso.setForce(lrs.getInt(5));
-                perso.setDexterite(lrs.getInt(6));
-                perso.setIntelligence(lrs.getInt(7));
-                perso.setConstitution(lrs.getInt(8));
-                perso.setSagesse(lrs.getInt(9));
-                perso.setCharisme(lrs.getInt(10));
-                perso.setExperience(lrs.getInt(11));
-                perso.setIdUtilisateur(lrs.getInt(12));
-                perso.setIdClasse(lrs.getInt(13));
-                perso.setNiveaux(lrs.getInt(14));
+                Personnage perso = new Personnage(
+                        lrs.getString(2),
+                        lrs.getString(3),
+                        lrs.getInt(4),
+                        lrs.getInt(5),
+                        lrs.getInt(6),
+                        lrs.getInt(7),
+                        lrs.getInt(8),
+                        lrs.getInt(9),
+                        lrs.getInt(10),
+                        lrs.getInt(11),
+                        lrs.getInt(12),
+                        lrs.getInt(13),
+                        lrs.getInt(14));
+
                 listPersonnage.add(perso);
             }
 
@@ -94,7 +94,7 @@ public class PersonnageDAO {
     }
 
     public static int insertInto(Connection cn, Personnage perso) {
-        int liAffect = 0;
+        int liAffect = -1;
 
         try {
             String lsSQL = "CALL personnageInsert(?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -129,9 +129,9 @@ public class PersonnageDAO {
         String lsSQL = "UPDATE personnages";
         lsSQL += " SET vie = ?, p_force = ?, p_dexterite = ?, p_intelligence = ?, p_constitution = ?, p_sagesse = ?, p_charisme = ?, experience = ?, niveau = ?";
         lsSQL += " WHERE prenom = ? AND nom = ?";
-        
+
         try (PreparedStatement lpst = cn.prepareStatement(lsSQL)) {
-            
+
             lpst.setInt(1, perso.getVie());
             lpst.setInt(2, perso.getForce());
             lpst.setInt(3, perso.getDexterite());
@@ -154,10 +154,10 @@ public class PersonnageDAO {
     }
 
     public static int delete(Connection cn, Personnage perso) {
-        int liAffect = 0;
+        int liAffect = -1;
 
         try {
-            String lsSQL = "DELTE FROM personnages WHERE nom = ? AND prenom = ?";
+            String lsSQL = "DELETE FROM personnages WHERE nom = ? AND prenom = ?";
             PreparedStatement lpst = cn.prepareCall(lsSQL);
             lpst.setString(1, perso.getNom());
             lpst.setString(2, perso.getPrenom());

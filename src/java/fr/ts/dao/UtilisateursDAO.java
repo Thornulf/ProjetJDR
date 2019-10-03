@@ -17,6 +17,13 @@ import java.sql.SQLException;
  */
 public class UtilisateursDAO {
     
+    /**
+     * Selectionne un urilisateurs en fonction de son mot de passe et son pseudo utilisé pour l'authentification
+     * @param pcnx
+     * @param pseudo
+     * @param mdp
+     * @return 
+     */
     public static Utilisateurs selectOne(Connection pcnx, String pseudo, String mdp) {
         Utilisateurs utilisateur = null;
         try {
@@ -37,7 +44,7 @@ public class UtilisateursDAO {
     }
     
     /**
-     * 
+     * Selection un utilisateur par son pseudo
      * @param pcnx
      * @param pseudo
      * @return 
@@ -61,7 +68,7 @@ public class UtilisateursDAO {
     } /// selectOne
 
     /**
-     *
+     * Enregistre un utilisateur dans la base de données
      * @param pcnx
      * @param utilisateur
      * @return
@@ -78,14 +85,13 @@ public class UtilisateursDAO {
             liAffecte = lpst.executeUpdate();
             lpst.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
             liAffecte = -1;
         }
         return liAffecte;
     } /// insert
 
     /**
-     *
+     * Supprime un utilisateur de la base de données
      * @param pcnx
      * @param utilisateur
      * @return

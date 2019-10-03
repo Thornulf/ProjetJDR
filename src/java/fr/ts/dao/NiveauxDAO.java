@@ -16,6 +16,12 @@ import java.sql.ResultSet;
  */
 public class NiveauxDAO {
     
+    /**
+     * Selectionne un niveau dans la BD
+     * @param cn
+     * @param lvl
+     * @return 
+     */
     public static Niveaux selectOne(Connection cn, int lvl) {
         Niveaux niveau = null;
         
