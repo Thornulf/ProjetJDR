@@ -28,6 +28,13 @@ public class CreationPersonnage extends HttpServlet {
 
     List<Classes> classes = new ArrayList();
 
+    /**
+     * Permet de remplir la liste déroulante qui permet de choisir la classe du personnage lorsqu'on arrive sur la page
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException      
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -46,6 +53,13 @@ public class CreationPersonnage extends HttpServlet {
         }
     }
 
+    /**
+     * Controle des données et enregistrement dans la base de données après l'envoi du formulaire
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -56,6 +70,7 @@ public class CreationPersonnage extends HttpServlet {
         String prenom = request.getParameter("prenom").substring(0, 1).toUpperCase() + request.getParameter("prenom").substring(1).toLowerCase();
         String lsValue = request.getParameter("classe");
 
+        // Récupération des champs du formulaire
         int vie = Integer.parseInt(request.getParameter("vie"));
         int FOR = Integer.parseInt(request.getParameter("FOR"));
         int DEX = Integer.parseInt(request.getParameter("DEX"));
@@ -70,6 +85,7 @@ public class CreationPersonnage extends HttpServlet {
 
         Personnage perso = PersonnageDAO.selectOne(cn, nom, prenom);
 
+        //Test sur la combianaison nom et prénom afin que l'ensemble reste unique dans la base de donneées
         if (perso != null) {
             message = "La combinaison nom et prenom du personnage est déjà prise";
         } else if (!prenom.equals("")) {
@@ -79,7 +95,7 @@ public class CreationPersonnage extends HttpServlet {
                         int ok = 0;
                         ok = Fonctions.initPerso(cn, lsValue, nom, prenom, vie, FOR,DEX, INT, CON, SAG, CHA, user);
                         if (ok == -1) {
-                            System.out.println("insertion dans la base de données non faite");
+                            message = "Une erreur c'est produite lors de l'enregistrement veuillez contacter l'administrateur";
                         }
                     } else {
                         message = "Veuiilez saisir une classe pour votre personnage";

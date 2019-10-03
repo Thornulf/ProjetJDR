@@ -7,7 +7,6 @@ package fr.ts.controls;
 
 import fr.ts.entities.Utilisateurs;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,10 +21,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "Deconnexion", urlPatterns = {"/Deconnexion"})
 public class Deconnexion extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
-     *
+     * Supprime la variable de session de l'utilisateur connecté
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs

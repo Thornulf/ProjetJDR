@@ -8,6 +8,7 @@ package fr.ts.controls;
 import fr.ts.entities.Utilisateurs;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -27,10 +28,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "FichePerso", urlPatterns = {"/FichePerso"})
 public class FichePerso extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
-     *
+     * Permet l'affichage de tous les personnages créés par l'utilisateur connecté
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -47,10 +46,11 @@ public class FichePerso extends HttpServlet {
             List<List<String>> listPerso = new ArrayList();
             
             try {
-                String lsSQL = "CALL personnageSelect (" + user.getIdUtilisateur() + ")";
+                String lsSQL = "CALL personnageSelect (?)";
                 
-                Statement stmt = cn.createStatement();
-                ResultSet rs = stmt.executeQuery(lsSQL);
+                PreparedStatement lpst = cn.prepareStatement(lsSQL);
+                lpst.setInt(1, user.getIdUtilisateur());                
+                ResultSet rs = lpst.executeQuery();
                 
                 while(rs.next()) {
                     List<String> out = new ArrayList();
@@ -71,7 +71,7 @@ public class FichePerso extends HttpServlet {
                 }
                 
                 rs.close();
-                stmt.close();
+                lpst.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }

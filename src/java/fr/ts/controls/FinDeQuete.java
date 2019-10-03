@@ -31,18 +31,21 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "FinDeQuete", urlPatterns = {"/FinDeQuete"})
 public class FinDeQuete extends HttpServlet {
 
+    /**
+     * Permet de récupérer les informations des personnages après l'arrivé sur la page ainsi qu'après avoir envoyé le formulaire
+     * @param cn
+     * @param user
+     * @return 
+     */
     private List<List<String>> initPage(Connection cn, Utilisateurs user) {
         List<List<String>> listPerso = new ArrayList();
 
         try {
-            String lsSQL = "SELECT p.prenom, p.nom, c.nom_classe, p.niveau,p.vie, "
-                    + "p.p_dexterite, p.p_force, p.p_intelligence, p.p_constitution, p.p_sagesse, p.p_charisme, p.experience "
-                    + "FROM personnages AS p "
-                    + "INNER JOIN classes AS c on p.id_classe = c.id_classe "
-                    + "WHERE p.id_utilisateur != " + user.getIdUtilisateur();
-
-            Statement stmt = cn.createStatement();
-            ResultSet rs = stmt.executeQuery(lsSQL);
+            String lsSQL = "CALL personnageSelect (?)";
+                
+                PreparedStatement lpst = cn.prepareStatement(lsSQL);
+                lpst.setInt(1, user.getIdUtilisateur());                
+                ResultSet rs = lpst.executeQuery();
 
             while (rs.next()) {
                 List<String> out = new ArrayList();
@@ -64,7 +67,7 @@ public class FinDeQuete extends HttpServlet {
             }
 
             rs.close();
-            stmt.close();
+            lpst.close();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
@@ -113,6 +116,8 @@ public class FinDeQuete extends HttpServlet {
         
         String vie, FOR, DEX, CON, INT, CHA, SAG, EXP;
         
+        
+        //Suite de test afin de savoir si les champs sont vide ou non pour éviter des erreurs SQL
         if(!request.getParameter("vie").equals("")) {
             vie = request.getParameter("vie");
         } else {

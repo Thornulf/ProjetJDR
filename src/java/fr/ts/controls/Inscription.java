@@ -24,12 +24,25 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "Inscription", urlPatterns = {"/Inscription"})
 public class Inscription extends HttpServlet {
     
+    /**
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         getServletContext().getRequestDispatcher("/JSP/Inscription.jsp").forward(request, response); //To change body of generated methods, choose Tools | Templates.
     }
     
+    /**
+     * Permet l'enregistrement d'un nouvel utilisateur dans la base de données
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();        
@@ -43,20 +56,18 @@ public class Inscription extends HttpServlet {
         String message = "";
         
         user = UtilisateursDAO.selectOneBy(cn, pseudo);
+        int liAffect = -1;
         
+        //Test pour savoir si le pseudo est déjà utilisé et si l'adresse mail est valide
         if(user != null) {
             message = "Le pseudo est déjà utilisé";
         } else {
             if(Pattern.matches(regexEmail, eMail)) {
-                user = new Utilisateurs();
-                
-                user.setPseudo(pseudo);
-                user.setPassword(mdp);
-                user.seteMail(eMail);
-                user.setIdRole(1);
-                UtilisateursDAO.insert(cn, user);
-            } else {
-                message = "L'adresse mail n'est pas valide";
+                user = new Utilisateurs(pseudo, mdp, eMail, 1);
+                liAffect = UtilisateursDAO.insert(cn, user);
+            }
+            if (liAffect < 1) {
+                message = "Adresse mail incorrect ou déjà utilisée";
             }
         }
         

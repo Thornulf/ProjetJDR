@@ -23,6 +23,13 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "ControleurPrincipal", urlPatterns = {"/ControleurPrincipal"})
 public class ControleurPrincipal extends HttpServlet {
 
+    /**
+     * Se connecte à la base de données à l'arrivé sur l'application et enregistre la connection dans une variable de session
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

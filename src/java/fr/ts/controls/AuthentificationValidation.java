@@ -24,8 +24,7 @@ import javax.servlet.http.HttpSession;
 public class AuthentificationValidation extends HttpServlet {
 
     /**
-     * Handles the HTTP <code>POST</code> method.
-     *
+     * Recherche dans la base de données si l'utilisateur exist et l'enregistre dans une variable de session
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs

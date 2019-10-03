@@ -18,11 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Authentification", urlPatterns = {"/Authentification"})
 public class Authentification extends HttpServlet {
-    
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
-     * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
