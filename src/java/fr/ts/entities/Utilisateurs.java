@@ -18,6 +18,13 @@ public class Utilisateurs {
 
     public Utilisateurs() {
     }    
+
+    public Utilisateurs(String pseudo, String password, String eMail, int idRole) {
+        this.pseudo = pseudo;
+        this.password = password;
+        this.eMail = eMail;
+        this.idRole = idRole;
+    }  
     
     public Utilisateurs(int idUtilisateur, String pseudo, String password, String eMail, int idRole) {
         this.idUtilisateur = idUtilisateur;

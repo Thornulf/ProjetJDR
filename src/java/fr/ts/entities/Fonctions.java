@@ -18,6 +18,7 @@ import fr.ts.entities.classes.Magicien;
 import fr.ts.entities.classes.Ensorceleur;
 import fr.ts.dao.PersonnageDAO;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,10 +30,31 @@ import java.text.Normalizer;
  */
 public class Fonctions {
 
+    /**
+     * Supprime les accents d'une chaine de caractères
+     * @param source
+     * @return 
+     */
     public static String removeAccent(String source) {
         return Normalizer.normalize(source, Normalizer.Form.NFD).replaceAll("[\u0300-\u036F]", "");
     }
 
+    /**
+     * Initialise un personnage en fonction de sa classe
+     * @param cn
+     * @param idClasse
+     * @param nom
+     * @param prenom
+     * @param vie
+     * @param FOR
+     * @param DEX
+     * @param CON
+     * @param INT
+     * @param SAG
+     * @param CHA
+     * @param user
+     * @return 
+     */
     public static int initPerso(Connection cn, String idClasse, String nom, String prenom, int vie, int FOR, int DEX, int CON, int INT, int SAG, int CHA, Utilisateurs user) {
         int ok = 0;
 
@@ -86,13 +108,20 @@ public class Fonctions {
         return ok;
     }
     
+    /**
+     * Test pour savoir si le personnage a gagner un niveau 
+     * @param perso
+     * @param cn
+     * @return 
+     */
     public static boolean okGagnerNiveau(Personnage perso, Connection cn) {
         boolean test = false;       
         
         try {
-            String lsSql = "SELECT niv_sup FROM niveaux WHERE niveau = " + perso.getNiveaux();
-            Statement stmt = cn.createStatement();
-            ResultSet rs = stmt.executeQuery(lsSql);
+            String lsSql = "SELECT niv_sup FROM niveaux WHERE niveau = ?";
+            PreparedStatement lpst = cn.prepareStatement(lsSql);
+            lpst.setInt(1, perso.getNiveaux());
+            ResultSet rs = lpst.executeQuery();
             
             if(rs.next()) {
                 int nivSup = rs.getInt(1);
@@ -102,8 +131,11 @@ public class Fonctions {
                 }
             }
             
+            rs.close();
+            lpst.close();
+            
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            
         }
         
         return test;

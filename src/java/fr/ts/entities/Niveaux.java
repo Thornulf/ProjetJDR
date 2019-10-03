@@ -14,6 +14,9 @@ public class Niveaux {
     private int niveau;
     private int nivSup;
 
+    public Niveaux() {
+    }    
+    
     public Niveaux(int niveau, int nivSup) {
         this.niveau = niveau;
         this.nivSup = nivSup;
