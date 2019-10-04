@@ -11,7 +11,6 @@ import fr.ts.entities.Personnage;
 import fr.ts.entities.Utilisateurs;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -32,46 +31,48 @@ import javax.servlet.http.HttpSession;
 public class FinDeQuete extends HttpServlet {
 
     /**
-     * Permet de récupérer les informations des personnages après l'arrivé sur la page ainsi qu'après avoir envoyé le formulaire
+     * Permet de récupérer les informations des personnages après l'arrivé sur
+     * la page ainsi qu'après avoir envoyé le formulaire
+     *
      * @param cn
      * @param user
-     * @return 
+     * @return
      */
     private List<List<String>> initPage(Connection cn, Utilisateurs user) {
         List<List<String>> listPerso = new ArrayList();
 
         try {
-            String lsSQL = "CALL personnageSelect (?)";
-                
-                PreparedStatement lpst = cn.prepareStatement(lsSQL);
-                lpst.setInt(1, user.getIdUtilisateur());                
-                ResultSet rs = lpst.executeQuery();
+            String lsSQL = "CALL recompensePersonnage";
 
-            while (rs.next()) {
+            Statement stmt = cn.createStatement();
+            ResultSet lrs = stmt.executeQuery(lsSQL);
+            
+            while (lrs.next()) {
+                
                 List<String> out = new ArrayList();
 
-                out.add(rs.getString(1));
-                out.add(rs.getString(2));
-                out.add(rs.getString(3));
-                out.add(Integer.toString(rs.getInt(4)));
-                out.add(Integer.toString(rs.getInt(5)));
-                out.add(Integer.toString(rs.getInt(6)));
-                out.add(Integer.toString(rs.getInt(7)));
-                out.add(Integer.toString(rs.getInt(8)));
-                out.add(Integer.toString(rs.getInt(9)));
-                out.add(Integer.toString(rs.getInt(10)));
-                out.add(Integer.toString(rs.getInt(11)));
-                out.add(Integer.toString(rs.getInt(12)));
+                out.add(lrs.getString(1));
+                out.add(lrs.getString(2));
+                out.add(lrs.getString(3));
+                out.add(Integer.toString(lrs.getInt(4)));
+                out.add(Integer.toString(lrs.getInt(5)));
+                out.add(Integer.toString(lrs.getInt(6)));
+                out.add(Integer.toString(lrs.getInt(7)));
+                out.add(Integer.toString(lrs.getInt(8)));
+                out.add(Integer.toString(lrs.getInt(9)));
+                out.add(Integer.toString(lrs.getInt(10)));
+                out.add(Integer.toString(lrs.getInt(11)));
+                out.add(Integer.toString(lrs.getInt(12)));
 
                 listPerso.add(out);
             }
 
-            rs.close();
-            lpst.close();
+            lrs.close();
+            stmt.close();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
-        
+
         return listPerso;
     }
 
@@ -84,9 +85,8 @@ public class FinDeQuete extends HttpServlet {
         if (user != null) {
 
             if (user.getIdRole() != 1) {
-
                 List<List<String>> listPerso = initPage(cn, user);
-                
+
                 request.setAttribute("perso", listPerso);
                 getServletContext().getRequestDispatcher("/JSP/FinDeQuete.jsp").forward(request, response);
             } else {
@@ -105,83 +105,77 @@ public class FinDeQuete extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Utilisateurs user = (Utilisateurs) session.getAttribute("utilisateur");
-        Connection cn = (Connection) session.getAttribute("connection");        
-        
+        Connection cn = (Connection) session.getAttribute("connection");
+
         String message = "";
 
         String nom = request.getParameter("nom");
         String prenom = request.getParameter("prenom");
-        
+
         Personnage perso = PersonnageDAO.selectOne(cn, nom, prenom);
-        
+
         String vie, FOR, DEX, CON, INT, CHA, SAG, EXP;
-        
-        
+
         //Suite de test afin de savoir si les champs sont vide ou non pour éviter des erreurs SQL
-        if(!request.getParameter("vie").equals("")) {
+        if (!request.getParameter("vie").equals("")) {
             vie = request.getParameter("vie");
         } else {
             vie = String.valueOf(perso.getVie());
         }
-        
-        if(!request.getParameter("force").equals("")) {
+
+        if (!request.getParameter("force").equals("")) {
             FOR = request.getParameter("force");
         } else {
             FOR = String.valueOf(perso.getForce());
         }
-        
-        if(!request.getParameter("dexterite").equals("")) {
+
+        if (!request.getParameter("dexterite").equals("")) {
             DEX = request.getParameter("vie");
         } else {
             DEX = String.valueOf(perso.getDexterite());
         }
-        
-        if(!request.getParameter("constitution").equals("")) {
+
+        if (!request.getParameter("constitution").equals("")) {
             CON = request.getParameter("constitution");
         } else {
             CON = String.valueOf(perso.getConstitution());
         }
-        
-        if(!request.getParameter("intelligence").equals("")) {
+
+        if (!request.getParameter("intelligence").equals("")) {
             INT = request.getParameter("intelligence");
         } else {
             INT = String.valueOf(perso.getIntelligence());
         }
-        
-        if(!request.getParameter("charisme").equals("")) {
+
+        if (!request.getParameter("charisme").equals("")) {
             CHA = request.getParameter("charisme");
         } else {
             CHA = String.valueOf(perso.getCharisme());
         }
-        
-        if(!request.getParameter("sagesse").equals("")) {
+
+        if (!request.getParameter("sagesse").equals("")) {
             SAG = request.getParameter("sagesse");
         } else {
             SAG = String.valueOf(perso.getSagesse());
         }
-        
-        if(!request.getParameter("experience").equals("")) {
+
+        if (!request.getParameter("experience").equals("")) {
             EXP = request.getParameter("experience");
         } else {
-            EXP = String.valueOf(perso.getExperience());
-        }
-
-        if (Fonctions.okGagnerNiveau(perso, cn)) {
-            perso.setNiveaux(perso.gagnerNiveau());
-            perso.setVie(Integer.valueOf(vie));
-            perso.setForce(Integer.valueOf(FOR));
-            perso.setDexterite(Integer.valueOf(DEX));
-            perso.setConstitution(Integer.valueOf(CON));
-            perso.setIntelligence(Integer.valueOf(INT));
-            perso.setCharisme(Integer.valueOf(CHA));
-            perso.setSagesse(Integer.valueOf(SAG));
+            EXP = "0";
         }
 
         perso.setExperience(perso.gagnerExperience(Integer.valueOf(EXP)));
-        PersonnageDAO.update(cn, perso);
+        
+        if (Fonctions.okGagnerNiveau(perso, cn)) {
+            Fonctions.updatePerso(cn, perso, Integer.valueOf(vie), Integer.valueOf(FOR), Integer.valueOf(DEX), Integer.valueOf(CON),
+                                  Integer.valueOf(INT), Integer.valueOf(SAG), Integer.valueOf(CHA));
+        } else {
+           PersonnageDAO.update(cn, perso); 
+        }      
 
         List<List<String>> listPerso = initPage(cn, user);
-        
+
         request.setAttribute("message", message);
         request.setAttribute("perso", listPerso);
         getServletContext().getRequestDispatcher("/JSP/FinDeQuete.jsp").forward(request, response);

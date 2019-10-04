@@ -69,6 +69,7 @@ public class PersonnageDAO {
 
             if (lrs.next()) {
                 perso = new Personnage(
+                        lrs.getInt(1),
                         lrs.getString(2),
                         lrs.getString(3),
                         lrs.getInt(4),
