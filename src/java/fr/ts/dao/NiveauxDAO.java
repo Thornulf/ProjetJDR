@@ -9,12 +9,38 @@ import fr.ts.entities.Niveaux;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Thomas
  */
 public class NiveauxDAO {
+    
+    public static List<Niveaux> selectAll(Connection cn) {
+        List<Niveaux> niveau = new ArrayList();
+        
+        try {
+            String lsSQL = "SELECT * FROM niveaux";
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(lsSQL);
+            
+            while(rs.next()) {                
+                Niveaux lvl = new Niveaux(rs.getInt(1), rs.getInt(2));
+                niveau.add(lvl);
+            }
+            
+            rs.close();
+            stmt.close();
+            
+        } catch (SQLException e) {
+        }
+        
+        return niveau;
+    }
     
     /**
      * Selectionne un niveau dans la BD
