@@ -13,7 +13,7 @@ import fr.ts.entities.Personnage;
  */
 public final class Rodeur extends Personnage{
     
-    private static int RODEUR_PV_MAX = 10;
+    private static int rodeurPvMax = 10;
 
     public Rodeur() {
         super();
@@ -40,15 +40,28 @@ public final class Rodeur extends Personnage{
         this.sagesse = this.setSagesse(sagesse);
         this.charisme = this.setCharisme(charisme);
     }
+
+    public int getRodeurPvMax() {
+        return rodeurPvMax;
+    }
+
+    public int setRodeurPvMax(int rodeurPvMax) {
+        return this.rodeurPvMax = rodeurPvMax;
+    }
     
     @Override
     public int setVie(int vie) {
-        if(vie > RODEUR_PV_MAX){
-            this.vie = RODEUR_PV_MAX;
+        if(vie > this.getRodeurPvMax()){
+            this.vie = this.getRodeurPvMax();
         } else {
             this.vie = vie;            
         }
         return this.vie;
+    }
+    
+    public int gagnerVie(int vie) {
+        this.setRodeurPvMax(this.getRodeurPvMax() + 2);
+        return this.setVie(vie);        
     }
     
 }

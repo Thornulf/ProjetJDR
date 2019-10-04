@@ -13,7 +13,7 @@ import fr.ts.entities.Personnage;
  */
 public final class Magicien extends Personnage {
     
-    private static int MAGICIEN_PV_MAX = 6;
+    private static int magicienPvMax = 6;
 
     public Magicien() {
         super();
@@ -41,13 +41,26 @@ public final class Magicien extends Personnage {
         this.charisme = this.setCharisme(charisme);
     }
 
+    public int getMagicienPvMax() {
+        return magicienPvMax;
+    }
+
+    public int setMagicienPvMax(int magicienPvMax) {
+        return this.magicienPvMax = magicienPvMax;
+    }
+
     @Override
     public int setVie(int vie) {
-        if (vie > MAGICIEN_PV_MAX) {
-            this.vie = MAGICIEN_PV_MAX;
+        if (vie > this.getMagicienPvMax()) {
+            this.vie = this.getMagicienPvMax();
         } else {
             this.vie = vie;
         }
         return this.vie;
+    }
+   
+    public int gagnerVie(int vie) {
+        this.setMagicienPvMax(this.getMagicienPvMax() + 2);
+        return this.setVie(vie);        
     }
 }

@@ -13,7 +13,7 @@ import fr.ts.entities.Personnage;
  */
 public final class Moine extends Personnage {
     
-    private static int MOINE_PV_MAX = 8;
+    private static int moinePvMax = 8;
 
     public Moine() {
         super();
@@ -41,13 +41,26 @@ public final class Moine extends Personnage {
         this.charisme = this.setCharisme(charisme);
     }
 
+    public int getMoinePvMax() {
+        return moinePvMax;
+    }
+
+    public int setMoinePvMax(int moinePvMax) {
+        return this.moinePvMax = moinePvMax;
+    }
+
     @Override
     public int setVie(int vie) {
-        if (vie > MOINE_PV_MAX) {
-            this.vie = MOINE_PV_MAX;
+        if (vie > this.getMoinePvMax()) {
+            this.vie = this.getMoinePvMax();
         } else {
             this.vie = vie;
         }
         return this.vie;
+    }
+    
+    public int gagnerVie(int vie) {
+        this.setMoinePvMax(this.getMoinePvMax() + 2);
+        return this.setVie(vie);        
     }
 }

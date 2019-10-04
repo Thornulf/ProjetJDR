@@ -13,7 +13,7 @@ import fr.ts.entities.Personnage;
  */
 public final class Roublard extends Personnage{
     
-    private static int ROUBLARD_PV_MAX = 8;
+    private static int roublardPvMax = 8;
 
     public Roublard() {
         super();
@@ -40,11 +40,19 @@ public final class Roublard extends Personnage{
         this.sagesse = this.setSagesse(sagesse);
         this.charisme = this.setCharisme(charisme);
     }
+
+    public int getRoublardPvMax() {
+        return roublardPvMax;
+    }
+
+    public static void setRoublardPvMax(int roublardPvMax) {
+        Roublard.roublardPvMax = roublardPvMax;
+    }
     
     @Override
     public int setVie(int vie) {
-        if(vie > ROUBLARD_PV_MAX){
-            this.vie = ROUBLARD_PV_MAX;
+        if(vie > this.getRoublardPvMax()){
+            this.vie = this.getRoublardPvMax();
         } else {
             this.vie = vie;            
         }
@@ -58,6 +66,9 @@ public final class Roublard extends Personnage{
         return this.niveaux;
     }
     
-    
+    public int gagnerVie(int vie) {
+        this.setRoublardPvMax(this.getRoublardPvMax() + 2);
+        return this.setVie(vie);        
+    }
     
 }

@@ -13,7 +13,7 @@ import fr.ts.entities.Personnage;
  */
 public final class Druide extends Personnage {
     
-    private static int DRUIDE_PV_MAX = 8;
+    private static int druidePvMax = 8;
 
     public Druide() {
         super();
@@ -41,13 +41,23 @@ public final class Druide extends Personnage {
         this.charisme = this.setCharisme(charisme);
     }
 
+    public int getDruidePvMax() {
+        return druidePvMax;
+    }
+
+    public int setDruidePvMax(int druidePvMax) {
+        return this.druidePvMax = druidePvMax;
+    }
+
     @Override
     public int setVie(int vie) {
-        if(vie > DRUIDE_PV_MAX){
-            this.vie = DRUIDE_PV_MAX;
+        if(vie > this.getDruidePvMax()) {
+            this.vie = this.getDruidePvMax();
         } else {
-            this.vie = vie;            
+           this.vie = vie; 
+           this.setDruidePvMax(vie);
         }
+        
         return this.vie;
     }
 
@@ -60,5 +70,10 @@ public final class Druide extends Personnage {
         }
         
         return this.intelligence;
+    }
+    
+    public int gagnerVie(int vie) {
+        this.druidePvMax += 2;
+        return this.setVie(vie);        
     }
 }

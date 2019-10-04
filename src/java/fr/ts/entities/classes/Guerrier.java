@@ -13,7 +13,7 @@ import fr.ts.entities.Personnage;
  */
 public final class Guerrier extends Personnage {
     
-    private static int GUERRIER_PV_MAX = 10;
+    private static int guerrierPvMax = 10;
 
     public Guerrier() {
         super();
@@ -41,13 +41,26 @@ public final class Guerrier extends Personnage {
         this.charisme = this.setCharisme(charisme);
     }
 
+    public int getGuerrierPvMax() {
+        return guerrierPvMax;
+    }
+
+    public int setGuerrierPvMax(int guerrierPvMax) {
+        return this.guerrierPvMax = guerrierPvMax;
+    }
+
     @Override
     public int setVie(int vie) {
-        if (vie > GUERRIER_PV_MAX) {
-            this.vie = GUERRIER_PV_MAX;
+        if (vie > this.getGuerrierPvMax()) {
+            this.vie = this.getGuerrierPvMax();
         } else {
             this.vie = vie;
         }
         return this.vie;
+    }
+    
+    public int gagnerVie(int vie) {
+        this.setGuerrierPvMax(this.getGuerrierPvMax() + 2);
+        return this.setVie(vie);        
     }
 }

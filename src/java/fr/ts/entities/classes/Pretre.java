@@ -13,7 +13,7 @@ import fr.ts.entities.Personnage;
  */
 public final class Pretre extends Personnage {
     
-    private static int PRETRE_PV_MAX = 8;
+    private static int pretrePvMax = 8;
 
     public Pretre() {
         super();
@@ -41,13 +41,26 @@ public final class Pretre extends Personnage {
         this.charisme = this.setCharisme(charisme);
     }
 
+    public int getPretrePvMax() {
+        return pretrePvMax;
+    }
+
+    public int setPretrePvMax(int pretrePvMax) {
+        return this.pretrePvMax = pretrePvMax;
+    }
+
     @Override
     public int setVie(int vie) {
-        if (vie > PRETRE_PV_MAX) {
-            this.vie = PRETRE_PV_MAX;
+        if (vie > this.getPretrePvMax()) {
+            this.vie = this.getPretrePvMax();
         } else {
             this.vie = vie;
         }
         return this.vie;
+    }
+    
+    public int gagnerVie(int vie) {
+        this.setPretrePvMax(this.getPretrePvMax() + 2);
+        return this.setVie(vie);        
     }
 }

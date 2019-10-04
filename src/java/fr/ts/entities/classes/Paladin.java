@@ -13,7 +13,7 @@ import fr.ts.entities.Personnage;
  */
 public final class Paladin extends Personnage {
     
-    private static int PALADIN_PV_MAX = 10;
+    private static int paladinPvmax = 10;
 
     public Paladin() {
         super();
@@ -41,13 +41,26 @@ public final class Paladin extends Personnage {
         this.charisme = this.setCharisme(charisme);
     }
 
+    public int getPaladinPvmax() {
+        return paladinPvmax;
+    }
+
+    public int setPaladinPvmax(int paladinPvmax) {
+        return this.paladinPvmax = paladinPvmax;
+    }
+
     @Override
     public int setVie(int vie) {
-        if (vie > PALADIN_PV_MAX) {
-            this.vie = PALADIN_PV_MAX;
+        if (vie > this.getPaladinPvmax()) {
+            this.vie = this.getPaladinPvmax();
         } else {
             this.vie = vie;
         }
         return this.vie;
+    }
+    
+    public int gagnerVie(int vie) {
+        this.setPaladinPvmax(this.getPaladinPvmax() + 2);
+        return this.setVie(vie);        
     }
 }

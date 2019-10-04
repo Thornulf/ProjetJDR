@@ -13,7 +13,7 @@ import fr.ts.entities.Personnage;
  */
 public final class Ensorceleur extends Personnage {
     
-    private static int ENSORCELEUR_PV_MAX = 6;
+    private static int ensorceleurPvMax = 6;
 
     public Ensorceleur() {
         super();
@@ -41,13 +41,26 @@ public final class Ensorceleur extends Personnage {
         this.charisme = this.setCharisme(charisme);
     }
 
+    public int getEnsorceleurPvMax() {
+        return ensorceleurPvMax;
+    }
+
+    public int setEnsorceleurPvMax(int ensorceleurPvMax) {
+        return this.ensorceleurPvMax = ensorceleurPvMax;
+    }
+    
     @Override
     public int setVie(int vie) {
-        if (vie > ENSORCELEUR_PV_MAX) {
-            this.vie = ENSORCELEUR_PV_MAX;
+        if (vie > this.getEnsorceleurPvMax()) {
+            this.vie = this.getEnsorceleurPvMax();
         } else {
             this.vie = vie;
         }
         return this.vie;
+    }
+    
+    public int gagnerVie(int vie) {
+        this.setEnsorceleurPvMax(this.getEnsorceleurPvMax() + 2);
+        return this.setVie(vie);        
     }
 }

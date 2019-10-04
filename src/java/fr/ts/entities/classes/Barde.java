@@ -13,7 +13,7 @@ import fr.ts.entities.Personnage;
  */
 public final class Barde extends Personnage{
     
-    private static int BARDE_PV_MAX = 8;
+    private static int bardePvMAX = 8;
 
     public Barde() {
         super();
@@ -40,13 +40,22 @@ public final class Barde extends Personnage{
         this.sagesse = this.setSagesse(sagesse);
         this.charisme = this.setCharisme(charisme);
     }
+
+    public int getBardePvMAX() {
+        return bardePvMAX;
+    }
+
+    public int setBardePvMAX(int bardePvMAX) {
+        return this.bardePvMAX = bardePvMAX;
+    }
     
     @Override
     public int setVie(int vie) {
-        if(vie > BARDE_PV_MAX) {
-            this.vie = BARDE_PV_MAX;
+        if(vie > this.getBardePvMAX()) {
+            this.vie = this.getBardePvMAX();
         } else {
            this.vie = vie; 
+           this.setBardePvMAX(vie);
         }
         
         return this.vie;
@@ -58,5 +67,10 @@ public final class Barde extends Personnage{
         
         return this.dexterite;
     } 
+    
+    public int gagnerVie(int vie) {
+        this.setBardePvMAX(this.getBardePvMAX() + 2);
+        return this.setVie(vie);        
+    }
           
 }
