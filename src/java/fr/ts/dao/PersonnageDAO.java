@@ -158,10 +158,9 @@ public class PersonnageDAO {
         int liAffect = -1;
 
         try {
-            String lsSQL = "DELETE FROM personnages WHERE nom = ? AND prenom = ?";
+            String lsSQL = "DELETE FROM personnages WHERE id_personnage = ?";
             PreparedStatement lpst = cn.prepareCall(lsSQL);
-            lpst.setString(1, perso.getNom());
-            lpst.setString(2, perso.getPrenom());
+            lpst.setInt(1, perso.getIdPersonnage());
             liAffect = lpst.executeUpdate();
             lpst.close();
         } catch (SQLException e) {

@@ -5,20 +5,20 @@
             <url>src/java/fr/ts/controls/Inscription.java</url>
             <bookmark id="1">
                 <name/>
-                <line>49</line>
+                <line>64</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/src/java/fr/ts/controls/FinDeQuete.java</file>
-            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/src/java/fr/ts/entities/Personnage.java</file>
-            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/web/JSP/Accueil.jsp</file>
-            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/src/java/fr/ts/entities/Fonctions.java</file>
+            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/web/JSP/FichePerso.jsp</file>
+            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/web/JSP/Nav.jsp</file>
             <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/src/java/fr/ts/controls/FichePerso.java</file>
-            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/src/java/fr/ts/dao/PersonnageDAO.java</file>
+            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/web/css/fichePerso.css</file>
             <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/web/JSP/FinDeQuete.jsp</file>
+            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/web/js/fichePerso.js</file>
+            <file>file:/C:/Users/Thomas/Documents/NetBeansProjects/ProjetJDR/web/JSP/Header.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -60,13 +60,6 @@ public final class Barde extends Personnage{
         
         return this.vie;
     }
-
-    @Override
-    public int setDexterite(int dexterite) {
-        this.dexterite = dexterite;
-        
-        return this.dexterite;
-    } 
     
     public int gagnerVie(int vie) {
         this.setBardePvMAX(this.getBardePvMAX() + 2);

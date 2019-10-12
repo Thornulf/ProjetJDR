@@ -60,17 +60,6 @@ public final class Druide extends Personnage {
         
         return this.vie;
     }
-
-    @Override
-    public int setIntelligence(int intelligence) {
-        if (this.getExperience() == 0 && this.getNiveaux() == 1) {
-            this.intelligence = intelligence + 2;
-        } else {
-            this.intelligence = intelligence;
-        }
-        
-        return this.intelligence;
-    }
     
     public int gagnerVie(int vie) {
         this.druidePvMax += 2;

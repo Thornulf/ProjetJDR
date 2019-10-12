@@ -11,9 +11,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="/ProjetJDR/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="/ProjetJDR/css/fichePerso.css" /> 
+        <script type="text/javascript" src="/ProjetJDR/js/jquery-3.4.1.min.js"></script>
         <title>Fiche de Personnage</title>
     </head>
     <body>
+
         <header>
             <%@include file="Header.jsp" %>
         </header>
@@ -22,35 +25,59 @@
         </nav>
         <article>
 
-            <c:forEach var="personnage" items="${perso}">
-                <div style="padding-left: 5%">
-                    <div>
-                        <div>
-                            <h3>Personnage : ${personnage.get(0)} ${personnage.get(1)}</h3> 
-                        </div>
-                        <div>
-                            <p>${personnage.get(2)} de niveau ${personnage.get(3)}</p>
-                        </div>
-                        <br>
-                    </div>
-                    <div>                    
-                        <div>
-                            <h4>Caractéristiques</h4> 
-                        </div>
-                        <p>Vie : ${personnage.get(4)}</p>
-                        <div style="float: left; margin: 0;">
-                            <p>Force : ${personnage.get(6)}</p>
-                            <p>Dextérité : ${personnage.get(5)}</p>
-                            <p>Intelligence : ${personnage.get(7)}</p>
-                        </div>
-                        <div style="margin: 0; margin-left: 150px;">
-                            <p>Constitution : ${personnage.get(8)}</p>
-                            <p>Sagesse : ${personnage.get(9)}</p>
-                            <p>Charisme : ${personnage.get(10)}</p>
-                        </div>
+            <div id="myBtnContainer" style="padding-left: 5%">
+                <c:forEach var="personnage" items="${perso}">
 
-                        <br>
-                    </div>
+                    <button class="btn" name="perso">${personnage.get(0)} ${personnage.get(1)}</button>
+
+                </c:forEach>
+            </div>
+
+            <br>
+
+            <c:forEach var="personnage" items="${perso}">
+                
+                <div style="padding-left: 5%">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="4">${personnage.get(0)} ${personnage.get(1)}</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <th colspan="2">${personnage.get(2)}</th>
+                                <th>Niveau</th>
+                                <th style="color: red">${personnage.get(3)}</th>
+                            </tr>
+                            <tr>
+                                <th colspan="2">Vie</th>
+                                <th colspan="2">${personnage.get(4)}</th> 
+                            </tr>
+                            <tr>
+                                <th>Force</th>
+                                <th style="color: blue">${personnage.get(6)}</th>
+                                <th>Dextérité</th>
+                                <th style="color: blue">${personnage.get(5)}</th>
+                            </tr>
+                            <tr>
+                                <th>Intelligence</th>
+                                <th style="color: blue">${personnage.get(7)}</th>
+                                <th>Constitution</th>
+                                <th style="color: blue">${personnage.get(8)}</th>
+                            </tr>
+                            <tr>
+                                <th>Sagesse</th>
+                                <th style="color: blue">${personnage.get(9)}</th>
+                                <th>Charisme</th>
+                                <th style="color: blue">${personnage.get(10)}</th>
+                            </tr>
+                        </tbody>
+                    </table>  
+                    <br>
+                    <br>
                 </div>
             </c:forEach>
 
@@ -58,5 +85,43 @@
         <footer>
             <%@include file="Footer.jsp" %>
         </footer>
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                var buttonPerso = $('[name="perso"]');
+                var fichePerso = $('table');
+
+                fichePerso.attr({
+                    'hidden' : true
+                });
+
+                buttonPerso.click(function () {
+
+                    var t = $(this);
+                    var value = t.html();
+                    
+                    var list = fichePerso.children();
+                    
+                    console.log(list);
+                    console.log(list[0]['outerText']);
+                    
+                    if(list[0]['outerText'] == value) {
+                        console.log("oui");
+                    }
+                                        
+                    buttonPerso.removeClass("btn active");
+                    buttonPerso.addClass("btn");
+
+                    t.removeClass("btn");
+                    t.addClass("btn active");
+                    
+                    fichePerso.fadeToggle();
+
+                });
+            });
+
+        </script>
+
     </body>
 </html>

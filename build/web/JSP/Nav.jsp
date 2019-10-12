@@ -24,7 +24,7 @@
 
 <% } else { %>
 
-<ul>             
+<ul style="padding-left: 5%">             
     <li>
         <a href="/ProjetJDR/CreationPersonnage">Créer un personnage | </a>
     </li>
