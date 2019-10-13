@@ -13,6 +13,7 @@
         <link rel="stylesheet" type="text/css" href="/ProjetJDR/css/main.css" />
         <link rel="stylesheet" type="text/css" href="/ProjetJDR/css/fichePerso.css" /> 
         <script type="text/javascript" src="/ProjetJDR/js/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="/ProjetJDR/js/FinDeQuete.js"></script>
         <title>Fiche de Personnage</title>
     </head>
     <body>
@@ -36,10 +37,10 @@
             <br>
 
             <c:forEach var="personnage" items="${perso}">
-                
+
                 <div style="padding-left: 5%">
 
-                    <table>
+                    <table name="${personnage.get(0)} ${personnage.get(1)}">
                         <thead>
                             <tr>
                                 <th colspan="4">${personnage.get(0)} ${personnage.get(1)}</th>
@@ -75,9 +76,7 @@
                                 <th style="color: blue">${personnage.get(10)}</th>
                             </tr>
                         </tbody>
-                    </table>  
-                    <br>
-                    <br>
+                    </table> 
                 </div>
             </c:forEach>
 
@@ -85,43 +84,6 @@
         <footer>
             <%@include file="Footer.jsp" %>
         </footer>
-
-        <script type="text/javascript">
-
-            $(document).ready(function () {
-                var buttonPerso = $('[name="perso"]');
-                var fichePerso = $('table');
-
-                fichePerso.attr({
-                    'hidden' : true
-                });
-
-                buttonPerso.click(function () {
-
-                    var t = $(this);
-                    var value = t.html();
-                    
-                    var list = fichePerso.children();
-                    
-                    console.log(list);
-                    console.log(list[0]['outerText']);
-                    
-                    if(list[0]['outerText'] == value) {
-                        console.log("oui");
-                    }
-                                        
-                    buttonPerso.removeClass("btn active");
-                    buttonPerso.addClass("btn");
-
-                    t.removeClass("btn");
-                    t.addClass("btn active");
-                    
-                    fichePerso.fadeToggle();
-
-                });
-            });
-
-        </script>
 
     </body>
 </html>

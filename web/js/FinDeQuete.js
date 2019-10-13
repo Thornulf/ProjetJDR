@@ -3,35 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 $(document).ready(function () {
+    var buttonPerso = $('[name="perso"]');
+    var fichePerso = $('table');
 
-    var bt = $('[name="submit"]');
-
-    bt.click(function () {
-        var t = $(this);
-        var nom = t.next().html();
-        var prenom = t.next().next().html();
-        
-        data = {
-          message : "insertion",
-          type = "primary"
-        };
-        
-        $.getJSON('Ajax_FinDeQuete' , {
-            nom : nom,
-            prenom : prenom
-        }, function(data) {
-            if(data.fail) {
-                
-            } else if(data.error) {
-                
-            } else {
-                
-            }
-        }).error(function() {
-            
-        });
+    fichePerso.attr({
+        'hidden': true
     });
 
-});
+    buttonPerso.click(function () {
 
+        var t = $(this);
+        var value = t.html();
+
+        var list = fichePerso.children();
+
+        for (var i = 0; i < list.length; i += 2) {
+            if (list[i]['outerText'].trim() == value) {
+                fichePerso.hide();
+                $('[name="' + value + '"]').show();
+            }
+        }
+
+        buttonPerso.removeClass("btn active");
+        buttonPerso.addClass("btn");
+
+        t.removeClass("btn");
+        t.addClass("btn active");
+
+    });
+});
